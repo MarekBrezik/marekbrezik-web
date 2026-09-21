@@ -1,7 +1,7 @@
 /*
   Minimal, calm, confident — but visually charged.
   Light background, near-black typography, generous whitespace,
-  one quiet accent, thin rules, no gradients or decoration.
+  one signal-orange accent, thin rules, light scroll reveals.
 
   Core idea: huge type, tiny type, and the tension between them.
 */
@@ -15,7 +15,7 @@
   --rule: #e2e2e2;
   --accent: #111111;
   --accent-contrast: #ffffff;
-  --spot: #c4a26d; /* one warm, muted accent for occasional charge */
+  --spot: #ff4d00; /* signal orange */
   --radius: 0;
   --max-width: 80rem;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -151,12 +151,13 @@ img {
   background: var(--accent);
   border: 1px solid var(--accent);
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .btn:hover {
-  background: var(--text-secondary);
-  border-color: var(--text-secondary);
+  background: var(--spot);
+  border-color: var(--spot);
+  color: var(--accent-contrast);
 }
 
 .btn:active {
@@ -192,15 +193,42 @@ img {
 }
 
 .link:hover {
-  border-color: var(--muted);
-  color: var(--text-secondary);
+  border-color: var(--spot);
+  color: var(--spot);
 }
 
 /* Big index numbers. */
 .index {
   font-size: clamp(3rem, 8vw, 7rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
-  color: var(--rule);
+  color: var(--spot);
+  opacity: 0.7;
+}
+
+/* Scroll reveals — subtle, no motion if user prefers reduced motion. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

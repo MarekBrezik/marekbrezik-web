@@ -3,7 +3,7 @@
 
 <section id="kontakt" class="section contact" aria-label="Kontakt">
   <div class="container contact-grid">
-    <div class="contact-intro">
+    <div class="contact-intro reveal">
       <p class="label contact-label">Kontakt</p>
       <h2 class="headline contact-title">
         Plánujete novostavbu nebo rekonstrukci?
@@ -15,7 +15,7 @@
 
     <form
       id="contact-form"
-      class="contact-form"
+      class="contact-form reveal stagger-1"
       action="mailto:info@marekbrezik.cz"
       method="POST"
       enctype="text/plain"
@@ -159,15 +159,14 @@
     color: var(--text);
     background: var(--bg);
     border: 1px solid var(--rule);
-    border-radius: 0;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
   .form-field input:focus,
   .form-field textarea:focus {
     outline: none;
-    border-color: var(--text);
-    box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.05);
+    border-color: var(--spot);
+    box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.08);
   }
 
   .form-field textarea {
