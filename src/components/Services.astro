@@ -2,27 +2,23 @@
 const services = [
   {
     index: "01",
-    category: "Energie",
     title: "Deye FVE",
     desc: "Fotovoltaika, baterie a řízení energie. Řešení výhradně v LV.",
   },
   {
     index: "02",
-    category: "Pohyb",
-    title: "WallBox",
-    desc: "Chytré nabíjení elektromobilu jako součást energetického systému domu.",
-  },
-  {
-    index: "03",
-    category: "Dům",
     title: "KNX",
     desc: "Řízení a automatizace technologií domu.",
   },
   {
-    index: "04",
-    category: "Integrace",
+    index: "03",
     title: "Home Assistant",
     desc: "Propojení technologií, automatizace a vlastní logika řízení.",
+  },
+  {
+    index: "04",
+    title: "WallBox",
+    desc: "Chytré nabíjení elektromobilu jako součást energetického systému domu.",
   },
 ];
 ---
@@ -30,9 +26,9 @@ const services = [
 <section id="reseni" class="section services" aria-labelledby="reseni-heading">
   <div class="container">
     <div class="services-header">
-      <span class="label">Řešení</span>
+      <span class="label">Technologie</span>
       <h2 id="reseni-heading" class="title services-lead">
-        Čtyři oblasti. Jeden fungující systém.
+        Poskládané do jednoho systému.
       </h2>
     </div>
 
@@ -44,7 +40,6 @@ const services = [
           <li class="service-item">
             <span class="service-index" aria-hidden="true">{service.index}</span>
             <div class="service-body">
-              <span class="label service-category">{service.category}</span>
               <h3 class="service-title">{service.title}</h3>
               <p class="body service-desc">{service.desc}</p>
             </div>
@@ -99,7 +94,7 @@ const services = [
 
   .service-index {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.05em;
     line-height: 1;
     color: var(--spot);
@@ -107,14 +102,9 @@ const services = [
     align-self: start;
   }
 
-  .service-category {
-    display: block;
-    margin-bottom: 0.75rem;
-  }
-
   .service-title {
     font-size: clamp(1.5rem, 3vw, 2.25rem);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.1;
     margin-bottom: 1rem;
@@ -122,6 +112,10 @@ const services = [
 
   .service-desc {
     max-width: 36ch;
+  }
+
+  .service-item:last-child .service-desc {
+    color: var(--muted);
   }
 
   @media (max-width: 900px) {

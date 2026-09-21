@@ -87,21 +87,21 @@ img {
 /* Display typography — dominates the page. */
 .display {
   font-size: clamp(3.2rem, 11.5vw, 10rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.045em;
   line-height: 0.92;
 }
 
 .headline {
   font-size: clamp(2rem, 6vw, 5rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.05;
 }
 
 .title {
   font-size: clamp(1.35rem, 3vw, 2.25rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
