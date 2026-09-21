@@ -16,17 +16,10 @@
     <form
       id="contact-form"
       class="contact-form reveal stagger-1"
-      action="mailto:info@marekbrezik.cz"
+      action="/api/contact"
       method="POST"
-      enctype="text/plain"
       novalidate
     >
-      <!--
-        Pro skutečné odesílání nahraďte action výše endpointem, např.:
-        action="https://formspree.io/f/VÁŠ_FORM_ID"
-        action="https://api.web3forms.com/submit" (+ hidden access_key)
-        nebo využijte Cloudflare Pages Functions.
-      -->
       <div class="form-row">
         <div class="form-field">
           <label for="name">Jméno</label>
@@ -49,6 +42,12 @@
         <textarea id="message" name="message" rows="4" required></textarea>
       </div>
 
+      {/* Honeypot field — hidden from humans. */}
+      <div class="form-field hp-field" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+
       <button type="submit" class="btn form-submit">
         Odeslat poptávku
         <span aria-hidden="true">→</span>
@@ -60,43 +59,23 @@
 </section>
 
 <script>
-  const form = document.getElementById('contact-form');
-  const status = document.getElementById('form-status');
+  const messages = {
+    success: 'Děkujeme. Brzy se vám ozveme.',
+    error: 'Odeslání se nepodařilo. Zkuste to prosím znovu, nebo nám napište přímo na e-mail.',
+    missing: 'Vyplňte prosím jméno, e-mail a zprávu.',
+    invalid: 'Zkontrolujte prosím formát e-mailu.',
+  };
 
-  if (form && status) {
-    form.addEventListener('submit', (event) => {
-      const action = form.getAttribute('action') || '';
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
+  const statusEl = document.getElementById('form-status');
 
-      // If action is still the mailto placeholder, compose a clean e-mail.
-      if (action.startsWith('mailto:')) {
-        event.preventDefault();
-
-        const data = new FormData(form);
-        const name = String(data.get('name') || '').trim();
-        const email = String(data.get('email') || '').trim();
-        const phone = String(data.get('phone') || '').trim();
-        const message = String(data.get('message') || '').trim();
-
-        if (!name || !email || !message) {
-          status.textContent = 'Vyplňte prosím jméno, e-mail a zprávu.';
-          return;
-        }
-
-        const body = [
-          `Jméno: ${name}`,
-          `E-mail: ${email}`,
-          phone ? `Telefon: ${phone}` : '',
-          '',
-          message,
-        ].join('\n');
-
-        const subject = encodeURIComponent(`Poptávka od ${name}`);
-        const mailto = `mailto:${action.replace('mailto:', '')}?subject=${subject}&body=${encodeURIComponent(body)}`;
-
-        window.location.href = mailto;
-        status.textContent = 'Otevíráme váš e-mailový klient…';
-      }
-    });
+  if (status && statusEl && messages[status]) {
+    statusEl.textContent = messages[status];
+    // Clean the query string so the message disappears on refresh.
+    if (window.history.replaceState) {
+      window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+    }
   }
 </script>
 
@@ -172,6 +151,19 @@
   .form-field textarea {
     resize: vertical;
     min-height: 8rem;
+  }
+
+  /* Honeypot: hidden from real users. */
+  .hp-field {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .form-submit {

@@ -8,15 +8,76 @@ import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 
+const site = "https://marekbrezik.cz";
 const title = "Marek Březík — Chytrá energie a automatizace domu";
 const description =
-  "Propojujeme energie a technologie tak, aby váš dům fungoval jako jeden celek. Deye, FVE, WallBox, KNX, Home Assistant.";
-const canonical = "https://marekbrezik.cz";
-const ogImage = "https://marekbrezik.cz/og.png";
+  "Propojujeme energie a technologie tak, aby váš dům fungoval jako jeden celek. Deye, FVE, WallBox, KNX, Home Assistant. Novostavby a rekonstrukce.";
+const ogImage = `${site}/og.png`;
+
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${site}/#website`,
+      url: site,
+      name: title,
+      description,
+      inLanguage: "cs-CZ",
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${site}/#organization`,
+      name: "Marek Březík",
+      url: site,
+      description,
+      areaServed: {
+        "@type": "Country",
+        name: "Czech Republic",
+      },
+      knowsAbout: [
+        "Smart home",
+        "Home automation",
+        "KNX",
+        "Home Assistant",
+        "Solar energy",
+        "Photovoltaics",
+        "Wallbox",
+        "Electric vehicle charging",
+      ],
+      sameAs: [],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${site}/#webpage`,
+      url: site,
+      name: title,
+      description,
+      isPartOf: { "@id": `${site}/#website` },
+      about: { "@id": `${site}/#organization` },
+      inLanguage: "cs-CZ",
+    },
+    {
+      "@type": "Service",
+      "@id": `${site}/#service`,
+      name: "Chytrá energie a automatizace domu",
+      description,
+      provider: { "@id": `${site}/#organization` },
+      areaServed: {
+        "@type": "Country",
+        name: "Czech Republic",
+      },
+      serviceType: [
+        "Návrh a integrace chytrých energetických systémů",
+        "Návrh a integrace systémů automatizace domu",
+      ],
+    },
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="cs">
+<html lang="cs-CZ">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,15 +85,21 @@ const ogImage = "https://marekbrezik.cz/og.png";
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <meta name="author" content="Marek Březík" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href={site} />
+    <link rel="alternate" hreflang="cs-cz" href={site} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:url" content={site} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="cs_CZ" />
+    <meta property="og:site_name" content="Marek Březík" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -44,7 +111,10 @@ const ogImage = "https://marekbrezik.cz/og.png";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#111111" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
 
     <!-- Fonts: none. System font stack for speed and simplicity. -->
   </head>
