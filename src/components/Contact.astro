@@ -20,16 +20,14 @@
       method="POST"
       novalidate
     >
-      <div class="form-row">
-        <div class="form-field">
-          <label for="name">Jméno</label>
-          <input type="text" id="name" name="name" required autocomplete="name" />
-        </div>
+      <div class="form-field">
+        <label for="name">Jméno a příjmení</label>
+        <input type="text" id="name" name="name" required autocomplete="name" />
+      </div>
 
-        <div class="form-field">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" required autocomplete="email" />
-        </div>
+      <div class="form-field">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
       </div>
 
       <div class="form-field">
@@ -61,7 +59,8 @@
 <script>
   const messages = {
     success: 'Děkujeme. Brzy se vám ozveme.',
-    error: 'Odeslání se nepodařilo. Zkuste to prosím znovu, nebo nám napište přímo na e-mail.',
+    config: 'Formulář není na straně serveru správně nakonfigurován. Kontaktujte nás prosím přímo na e-mail.',
+    api: 'Odeslání se nepodařilo. Zkuste to prosím znovu, nebo nám napište přímo na e-mail.',
     missing: 'Vyplňte prosím jméno, e-mail a zprávu.',
     invalid: 'Zkontrolujte prosím formát e-mailu.',
   };
@@ -72,7 +71,6 @@
 
   if (status && statusEl && messages[status]) {
     statusEl.textContent = messages[status];
-    // Clean the query string so the message disappears on refresh.
     if (window.history.replaceState) {
       window.history.replaceState({}, '', window.location.pathname + window.location.hash);
     }
@@ -107,12 +105,6 @@
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
   }
 
@@ -184,10 +176,6 @@
   }
 
   @media (max-width: 560px) {
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-
     .form-submit {
       width: 100%;
       justify-content: center;

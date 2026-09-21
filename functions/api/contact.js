@@ -14,6 +14,8 @@ export async function onRequestPost(context) {
   const { request, env } = context;
   const origin = new URL(request.url).origin;
 
+  const redirect = (status) => Response.redirect(`${origin}/?status=${status}#kontakt`, 303);
+
   try {
     const formData = await request.formData();
     const name = String(formData.get('name') || '').trim();
@@ -24,21 +26,26 @@ export async function onRequestPost(context) {
 
     // Honeypot: if the hidden field is filled, silently accept but do nothing.
     if (website) {
-      return Response.redirect(`${origin}/?status=success#kontakt`, 303);
+      return redirect('success');
     }
 
     if (!name || !email || !message) {
-      return Response.redirect(`${origin}/?status=missing#kontakt`, 303);
+      return redirect('missing');
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return Response.redirect(`${origin}/?status=invalid#kontakt`, 303);
+      return redirect('invalid');
     }
 
-    if (!env.RESEND_API_KEY || !env.RESEND_TO_EMAIL || !env.RESEND_FROM_EMAIL) {
-      console.error('Missing Resend environment variables');
-      return Response.redirect(`${origin}/?status=error#kontakt`, 303);
+    const missing = [];
+    if (!env.RESEND_API_KEY) missing.push('RESEND_API_KEY');
+    if (!env.RESEND_TO_EMAIL) missing.push('RESEND_TO_EMAIL');
+    if (!env.RESEND_FROM_EMAIL) missing.push('RESEND_FROM_EMAIL');
+
+    if (missing.length > 0) {
+      console.error('Missing environment variables:', missing.join(', '));
+      return redirect('config');
     }
 
     const bodyLines = [`Jméno: ${name}`, `E-mail: ${email}`];
@@ -63,12 +70,12 @@ export async function onRequestPost(context) {
     if (!res.ok) {
       const text = await res.text();
       console.error('Resend API error:', res.status, text);
-      return Response.redirect(`${origin}/?status=error#kontakt`, 303);
+      return redirect('api');
     }
 
-    return Response.redirect(`${origin}/?status=success#kontakt`, 303);
+    return redirect('success');
   } catch (err) {
     console.error('Contact form error:', err);
-    return Response.redirect(`${origin}/?status=error#kontakt`, 303);
+    return redirect('api');
   }
 }
