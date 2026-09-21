@@ -2,7 +2,7 @@
 
 Minimalistický one-page web pro prezentaci řešení chytré energie a automatizace domu.
 
-Postaveno na Astro jako statický build, připravené pro Cloudflare Pages.
+Postaveno na Astro, připravené pro statický build na Cloudflare Pages.
 
 ## Struktura
 
@@ -15,64 +15,49 @@ Postaveno na Astro jako statický build, připravené pro Cloudflare Pages.
 │   ├── pages/           # Hlavní stránka
 │   └── styles/          # Globální CSS
 ├── astro.config.mjs
-├── wrangler.toml
 └── package.json
 ```
 
-## Vývoj
+## Lokální vývoj
 
 ```sh
 npm install
 npm run dev
 ```
 
-## Build a preview
+## Build
 
 ```sh
 npm run build
-npm run preview
 ```
 
-Výchozí adresář pro statický build: `./dist/`.
+Výstupní adresář pro Cloudflare Pages: `./dist/`.
 
-## Nasazení na Cloudflare Pages
+## Nasazení na Cloudflare Pages (od nuly)
 
-1. Připojte repozitář v Cloudflare Pages.
-2. Nastavte build command: `npm run build`
-3. Nastavte output directory: `dist`
-4. Nastavte environment variables pro formulář (viz níže).
+1. V Cloudflare Dashboard → **Pages** → **Create a project** → **Connect to Git**
+2. Vyber repozitář `MarekBrezik/marekbrezik-web` a větev `main`
+3. Nastav:
+   - **Build command:** `npm run build`
+   - **Output directory:** `dist`
+4. Klikni **Save and Deploy**
+5. Po prvním deployi přejdi do projektu → **Settings** → **Environment variables**
+6. Přidej proměnné podle sekce níže a klikni **Save**
+7. Vrať se do **Deployments** a klikni **Retry deployment** (nebo udělej nový push)
 
-## Kontaktní formulář (Resend)
+## Environment variables pro formulář
 
 Formulář odesílá přes Cloudflare Pages Function do [Resend](https://resend.com).
 
-### Lokální vývoj
+V Cloudflare Pages dashboardu přidej tyto proměnné:
 
-Zkopírujte `.env.example` do `.env` a doplňte hodnoty:
-
-```sh
-cp .env.example .env
-```
-
-### Produkční nastavení
-
-V Cloudflare Pages dashboardu (Settings → Environment variables) nebo přes Wrangler CLI přidejte tyto **secrets**:
-
-| Variable | Popis |
+| Variable | Value |
 |---|---|
-| `RESEND_API_KEY` | API klíč z Resend |
-| `RESEND_FROM_EMAIL` | Ověřený odesílací e-mail, např. `Kontakt <kontakt@marekbrezik.cz>` |
-| `RESEND_TO_EMAIL` | E-mail, kam se mají poptávky posílat |
+| `RESEND_API_KEY` | tvůj API klíč z Resend |
+| `RESEND_FROM_EMAIL` | ověřený odesílací e-mail, např. `Kontakt <kontakt@marekbrezik.cz>` |
+| `RESEND_TO_EMAIL` | e-mail, kam se mají poptávky posílat |
 
-Pomocí Wrangler CLI:
-
-```sh
-npx wrangler pages secret put RESEND_API_KEY
-npx wrangler pages secret put RESEND_FROM_EMAIL
-npx wrangler pages secret put RESEND_TO_EMAIL
-```
-
-**Důležité:** V Resend musí být odesílací doména ověřená. Bez ověření můžete odesílat pouze na trial e-mailové adresy.
+**Důležité:** V Resend musí být odesílací doména ověřená. Bez ověření můžeš odesílat pouze na trial e-mailové adresy.
 
 ## SEO
 
