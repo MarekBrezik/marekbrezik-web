@@ -1,0 +1,63 @@
+---
+---
+
+<section class="section idea" aria-label="Hlavní myšlenka">
+  <div class="container idea-inner">
+    <p class="label idea-label">Myšlenka</p>
+    <h2 class="display idea-title">
+      Jednoduše.<br />
+      Smysluplně.<br />
+      <span class="idea-soft">Podle vašeho domu.</span>
+    </h2>
+    <p class="body-lg idea-text">
+      Technologie nemusí fungovat každá zvlášť. Propojíme je tak, aby spolu dávaly smysl.
+    </p>
+  </div>
+</section>
+
+<style>
+  .idea {
+    border-block: 1px solid var(--rule);
+  }
+
+  .idea-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem 4rem;
+    align-items: start;
+  }
+
+  .idea-label {
+    margin-top: 1.5rem;
+  }
+
+  .idea-title {
+    max-width: 14ch;
+  }
+
+  .idea-soft {
+    color: var(--muted);
+  }
+
+  .idea-text {
+    grid-column: 2;
+    max-width: 45ch;
+    margin-top: -2rem;
+  }
+
+  @media (max-width: 900px) {
+    .idea-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .idea-label {
+      margin-top: 0;
+    }
+
+    .idea-text {
+      grid-column: 1;
+      margin-top: 0;
+    }
+  }
+</style>

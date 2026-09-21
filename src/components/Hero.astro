@@ -1,0 +1,129 @@
+---
+---
+
+<section class="hero" aria-label="Úvod">
+  <div class="container hero-grid">
+    <div class="hero-main">
+      <p class="hero-kicker">Chytré řešení pro novostavby a rekonstrukce</p>
+      <h1 class="display hero-title">
+        Váš dům.<br />
+        Vaše energie.<br />
+        <span class="hero-soft">Všechno propojené.</span>
+      </h1>
+    </div>
+
+    <div class="hero-side">
+      <p class="body hero-side-text">
+        Navrhujeme a integrujeme energetické a řídicí systémy tak, aby technologie vašeho domu spolupracovaly — a část řízení fungovala automaticky.
+      </p>
+      <a href="#kontakt" class="btn hero-cta">
+        Pojďme to probrat
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-tech">
+      <span class="label">Technologie</span>
+      <p class="hero-tech-list">
+        Deye <span aria-hidden="true">·</span> WallBox <span aria-hidden="true">·</span> KNX <span aria-hidden="true">·</span> Home Assistant
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100svh - 4rem);
+    padding-block: 4rem 3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 3rem;
+    align-items: end;
+  }
+
+  .hero-kicker {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    max-width: 14ch;
+  }
+
+  .hero-soft {
+    color: var(--spot);
+  }
+
+  .hero-side {
+    padding-bottom: 0.5rem;
+    max-width: 34ch;
+    justify-self: end;
+  }
+
+  .hero-side-text {
+    margin-bottom: 2rem;
+  }
+
+  .hero-tech {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .hero-tech-list {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .hero-side {
+      justify-self: start;
+      max-width: 50ch;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: calc(100svh - 3.5rem);
+      padding-block: 2.5rem 2rem;
+    }
+
+    .hero-kicker {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-side-text {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tech {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+  }
+</style>

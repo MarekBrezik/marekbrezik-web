@@ -1,0 +1,147 @@
+---
+const services = [
+  {
+    index: "01",
+    category: "Energie",
+    title: "Deye FVE",
+    desc: "Fotovoltaika, baterie a řízení energie. Řešení výhradně v LV.",
+  },
+  {
+    index: "02",
+    category: "Pohyb",
+    title: "WallBox",
+    desc: "Chytré nabíjení elektromobilu jako součást energetického systému domu.",
+  },
+  {
+    index: "03",
+    category: "Dům",
+    title: "KNX",
+    desc: "Řízení a automatizace technologií domu.",
+  },
+  {
+    index: "04",
+    category: "Integrace",
+    title: "Home Assistant",
+    desc: "Propojení technologií, automatizace a vlastní logika řízení.",
+  },
+];
+---
+
+<section id="reseni" class="section services" aria-labelledby="reseni-heading">
+  <div class="container">
+    <div class="services-header">
+      <span class="label">Řešení</span>
+      <h2 id="reseni-heading" class="title services-lead">
+        Čtyři oblasti. Jeden fungující systém.
+      </h2>
+    </div>
+
+    <hr class="rule" />
+
+    <ol class="services-list">
+      {
+        services.map((service) => (
+          <li class="service-item">
+            <span class="service-index" aria-hidden="true">{service.index}</span>
+            <div class="service-body">
+              <span class="label service-category">{service.category}</span>
+              <h3 class="service-title">{service.title}</h3>
+              <p class="body service-desc">{service.desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--bg-soft);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: baseline;
+    margin-bottom: 3rem;
+  }
+
+  .services-lead {
+    max-width: 22ch;
+  }
+
+  .services-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .service-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    transition: background 0.2s ease;
+  }
+
+  .service-item:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .service-item:hover {
+    background: var(--bg);
+  }
+
+  .service-index {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--spot);
+    opacity: 0.65;
+    align-self: start;
+  }
+
+  .service-category {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .service-desc {
+    max-width: 36ch;
+  }
+
+  @media (max-width: 900px) {
+    .services-header {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .services-list {
+      grid-template-columns: 1fr;
+    }
+
+    .service-item {
+      border-right: 0;
+      padding: 2rem 0;
+    }
+
+    .service-item:nth-child(2n) {
+      border-right: 0;
+    }
+  }
+</style>
