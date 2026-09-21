@@ -14,6 +14,25 @@ const description =
   "Propojujeme energie a technologie tak, aby váš dům fungoval jako jeden celek. Deye, FVE, WallBox, KNX, Home Assistant. Novostavby a rekonstrukce.";
 const ogImage = `${site}/og.png`;
 
+const areaServed = [
+  {
+    "@type": "AdministrativeArea",
+    name: "Morava",
+    containedInPlace: {
+      "@type": "Country",
+      name: "Czech Republic",
+    },
+  },
+  {
+    "@type": "Country",
+    name: "Czech Republic",
+  },
+  {
+    "@type": "Country",
+    name: "Slovakia",
+  },
+];
+
 const schemaOrg = {
   "@context": "https://schema.org",
   "@graph": [
@@ -31,10 +50,7 @@ const schemaOrg = {
       name: "Marek Březík",
       url: site,
       description,
-      areaServed: {
-        "@type": "Country",
-        name: "Czech Republic",
-      },
+      areaServed,
       knowsAbout: [
         "Smart home",
         "Home automation",
@@ -63,10 +79,7 @@ const schemaOrg = {
       name: "Chytrá energie a automatizace domu",
       description,
       provider: { "@id": `${site}/#organization` },
-      areaServed: {
-        "@type": "Country",
-        name: "Czech Republic",
-      },
+      areaServed,
       serviceType: [
         "Návrh a integrace chytrých energetických systémů",
         "Návrh a integrace systémů automatizace domu",
