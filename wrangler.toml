@@ -1,0 +1,9 @@
+# Cloudflare Pages configuration.
+# Secrets (RESEND_API_KEY, RESEND_FROM_EMAIL, RESEND_TO_EMAIL) must be set
+# via the Cloudflare Pages dashboard or `wrangler pages secret put`.
+
+name = "marekbrezik-web"
+compatibility_date = "2025-09-21"
+
+[vars]
+# No public variables needed for this site.
